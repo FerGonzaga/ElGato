@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Clases y Atributos</title>
+</head>
+<body>
+    <h1>Clases y Atributos</h1>
+    
+    <h2>1. Clase <code>IniciarJuego</code> clase principal</h2>
+    
+    <h3>Atributos:</h3>
+    <ul>
+        <li><code>J1: string</code> - Representa al jugador 1, utilizando el símbolo <code>"O"</code>.</li>
+        <li><code>J2: string</code> - Representa al jugador 2, utilizando el símbolo <code>"X"</code>.</li>
+        <li><code>tablero: List[string]</code> - Lista de 9 elementos que representa el tablero, inicialmente vacío. Se utiliza para almacenar las jugadas de los dos jugadores.
+            <ul>
+                <li>[ 0 ] [ 1 ] [ 2 ]</li>
+                <li>[ 3 ] [ 4 ] [ 5 ]</li>
+                <li>[ 6 ] [ 7 ] [ 8 ]</li>
+            </ul>
+        </li>
+        <li><code>turno_actual: string</code> - Indica el turno actual, alternando entre <code>"O"</code> y <code>"X"</code>. Comienza con el jugador 1 (<code>J1</code>).</li>
+        <li><code>root: Tk</code> - La ventana principal del juego, que contiene el tablero y los controles.</li>
+        <li><code>ganador: Ganador</code> - Una instancia de la clase <code>Ganador</code>, que se encarga de verificar si hay un ganador o empate.</li>
+        <li><code>mensaje: StringVar</code> - Variable que almacena mensajes para mostrar información (como el estado del juego, ganador, o empate).</li>
+    </ul>
+
+    <h3>Métodos:</h3>
+    <ul>
+        <li><code>__init__(self, root: Tk)</code> - Inicializa los atributos de la clase <code>IniciarJuego</code> y configura el entorno gráfico.
+            <ul>
+                <li><code>root</code> es la ventana principal de Tkinter.</li>
+                <li>Se define quién empieza (<code>turno_actual</code>) y se llama a <code>iniciar_juego()</code> para configurar la interfaz del juego.</li>
+            </ul>
+        </li>
+        <li><code>iniciar_juego(self)</code> - Método que crea los botones del tablero de juego y organiza los elementos gráficos.
+            <ul>
+                <li>Crea un tablero de 3x3 con botones, donde cada botón corresponde a una casilla en el tablero.</li>
+                <li>Los botones están conectados al método <code>ciclo()</code> para ejecutar jugadas.</li>
+            </ul>
+        </li>
+        <li><code>ciclo(self, posicion: int)</code> - Controla el ciclo del juego:
+            <ul>
+                <li><strong>Entrada:</strong> recibe la <code>posicion</code> del tablero (0-8) que corresponde a la casilla seleccionada.</li>
+                <li><strong>Proceso:</strong>
+                    <ul>
+                        <li>Si la casilla está vacía, coloca el símbolo del jugador actual.</li>
+                        <li>Guarda el movimiento en el tablero y verifica si hay un ganador o empate.</li>
+                        <li>Si hay un ganador, se muestra el mensaje y se reinicia el juego después de 2 segundos.</li>
+                        <li>Si no hay ganador, el turno se alterna entre los jugadores.</li>
+                    </ul>
+                </li>
+            </ul>
+        </li>
+        <li><code>deshabilitar_botones(self)</code> - Desactiva todos los botones cuando el juego ha terminado (ya sea por ganador o empate), para evitar nuevas jugadas hasta el reinicio.</li>
+        <li><code>reiniciar_juego(self)</code> - Reinicia el estado del juego, restableciendo el tablero y habilitando los botones para una nueva partida.</li>
+    </ul>
+
+    <hr>
+
+    <h2>2. Clase <code>Ganador</code></h2>
+    
+    <h3>Descripción:</h3>
+    <p>Esta clase maneja la lógica para determinar si un jugador ha ganado o si el juego ha terminado en empate.</p>
+    
+    <h3>Métodos:</h3>
+    <ul>
+        <li><code>quien_gana(self, tablero: List[str]) -> bool</code>:
+            <ul>
+                <li><strong>Entrada:</strong> recibe el tablero como una lista de cadenas de 9 posiciones.</li>
+                <li><strong>Proceso:</strong> compara las combinaciones ganadoras posibles (filas, columnas y diagonales) con el estado actual del tablero.</li>
+                <li><strong>Salida:</strong> retorna <code>True</code> si alguna de las combinaciones ganadoras está completa con el mismo símbolo (<code>"O"</code> o <code>"X"</code>), o <code>False</code> si no hay ganador.</li>
+            </ul>
+        </li>
+        <li><code>empate(self, tablero: List[str]) -> bool</code>:
+            <ul>
+                <li><strong>Entrada:</strong> recibe el tablero actual como una lista de cadenas.</li>
+                <li><strong>Proceso:</strong> revisa si todas las posiciones del tablero están ocupadas.</li>
+                <li><strong>Salida:</strong> retorna <code>True</code> si el tablero está lleno y no hay ganador, indicando un empate.</li>
+            </ul>
+        </li>
+    </ul>
+
+    <h3>Combinaciones Ganadoras (8 Secuencias):</h3>
+    <ul>
+        <li><strong>Filas:</strong>
+            <ul>
+                <li>[0, 1, 2]</li>
+                <li>[3, 4, 5]</li>
+                <li>[6, 7, 8]</li>
+            </ul>
+        </li>
+        <li><strong>Columnas:</strong>
+            <ul>
+                <li>[0, 3, 6]</li>
+                <li>[1, 4, 7]</li>
+                <li>[2, 5, 8]</li>
+            </ul>
+        </li>
+        <li><strong>Diagonales:</strong>
+            <ul>
+                <li>[0, 4, 8]</li>
+                <li>[2, 4, 6]</li>
+            </ul>
+        </li>
+    </ul>
+
+    <hr>
+
+    <h2>3. Clase <code>Guardar</code></h2>
+    
+    <h3>Método:</h3>
+    <ul>
+        <li><code>guardar(self, posicion: int, simbolo: string, tablero: List[str]) -> None</code>:
+            <ul>
+                <li><strong>Entrada:</strong> recibe la <code>posicion</code> en el tablero (0-8), el <code>simbolo</code> correspondiente al jugador actual (<code>"O"</code> o <code>"X"</code>) y el <code>tablero</code> donde se guardará la jugada.</li>
+                <li><strong>Proceso:</strong> coloca el símbolo en la posición especificada del tablero.</li>
+                <li><strong>Salida:</strong> no tiene retorno, simplemente actualiza el estado del tablero.</li>
+            </ul>
+        </li>
+    </ul>
+
+    <hr>
+
+    <h3>Flujo del Juego</h3>
+    <ol>
+        <li><strong>Inicio del Juego:</strong>
+            <ul>
+                <li>Se crea una instancia de <code>IniciarJuego</code>.</li>
+                <li>Se inicializa el tablero con 9 posiciones vacías.</li>
+                <li>El primer turno se asigna a J1 (<code>"O"</code>).</li>
+            </ul>
+        </li>
+        <li><strong>Ciclo de Juego:</strong>
+            <ul>
+                <li><strong>Entrada:</strong> El jugador actual selecciona una posición en el tablero.</li>
+                <li><strong>Validación:</strong>
+                    <ul>
+                        <li>Se verifica si la posición seleccionada está vacía.</li>
+                        <li>Si está vacía, se guarda el símbolo correspondiente (<code>"O"</code> o <code>"X"</code>) utilizando el método <code>guardar()</code>.</li>
+                    </ul>
+                </li>
+                <li><strong>Comprobación de Ganador:</strong>
+                    <ul>
+                        <li>Se llama al método <code>quien_gana()</code> de la clase <code>Ganador</code> para verificar si el jugador actual ha ganado.</li>
+                        <li>Si hay un ganador, se imprime un mensaje anunciando al ganador y el juego se reinicia tras 2 segundos.</li>
+                    </ul>
+                </li>
+                <li><strong>Comprobación de Empate:</strong>
+                    <ul>
+                        <li>Si no hay ganador y todas las posiciones están ocupadas, se llama al método <code>empate()</code>.</li>
+                        <li>Si es un empate, se imprime un mensaje y el juego se reinicia tras 2 segundos.</li>
+                    </ul>
+                </li>
+                <li><strong>Cambio de Turno:</strong>
+                    <ul>
+                        <li>Si no hay ganador ni empate, el turno se alterna al siguiente jugador y el ciclo se repite.</li>
+                    </ul>
+                </li>
+            </ul>
+        </li>
+        <li><strong>Fin del Juego:</strong>
+            <ul>
+                <li>El juego finaliza si hay un ganador o si se reinicia tras un empate.</li>
+            </ul>
+        </li>
+    </ol>
+</body>
+</html>
