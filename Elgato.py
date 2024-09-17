@@ -11,6 +11,9 @@ class IniciarJuego:
         self.mensaje = StringVar()  # Variable para mostrar mensajes en la interfaz gráfica
         self.iniciar_juego()  # Llama al método para iniciar el juego
 
+
+
+
     def iniciar_juego(self):
         # Crea y configura los botones del tablero
         self.botones = []  # Lista para almacenar los botones del tablero
@@ -21,6 +24,9 @@ class IniciarJuego:
             self.botones.append(boton)  # Agrega el botón a la lista
         # Crea una etiqueta para mostrar mensajes
         Label(self.root, textvariable=self.mensaje).grid(row=3, column=1)
+
+
+
 
     def ciclo(self, posicion):
         # Maneja el ciclo del juego cuando se hace clic en un botón
@@ -40,6 +46,10 @@ class IniciarJuego:
                 # Cambia el turno al siguiente jugador
                 self.turno_actual = self.J2 if self.turno_actual == self.J1 else self.J1
 
+
+
+
+
     def quien_gana(self):
         # Verifica si hay un ganador
         combinaciones = [
@@ -53,6 +63,10 @@ class IniciarJuego:
                 return True  # Retorna True si hay una combinación ganadora
         return False  # Retorna False si no hay ganador
 
+
+
+
+
     def reiniciar_juego(self):
         # Reinicia el juego para una nueva partida
         self.tablero = [""] * 9  # Limpia el tablero
@@ -60,6 +74,9 @@ class IniciarJuego:
         self.mensaje.set("")  # Limpia el mensaje mostrado
         for boton in self.botones:
             boton.config(text="", state=NORMAL)  # Reinicia el texto y habilita los botones
+
+
+
 
 if __name__ == "__main__":
     # Código para ejecutar la aplicación

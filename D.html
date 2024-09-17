@@ -10,7 +10,6 @@
             margin: 0;
             padding: 0;
             height: 100vh;
-            overflow: hidden;
         }
 
         .transparente {
@@ -35,19 +34,25 @@
             font-family: 'Courier New', Courier, monospace;
             overflow-x: auto;
         }
+        .separator {
+            height: 20px; /* Ajusta la altura del separador */
+            border-bottom: 1px solid #ccc; /* Ajusta el estilo del borde del separador */
+            margin: 20px 0; /* Espaciado superior e inferior */
+        }
     </style>
     
 </head>
 <body>
-    
-    
+
+
+
     <div class="transparente">
-        <h1> GATOGAME </h1>
+        <center><h1> GATOGAME </h1></center>
         
 
         <h2>DISEÑO DEL JUEGO</h2>
 
-<center><img src="dis.png" alt="Descripción de la imagen" width="400" height="500"></center>
+<center><img src="dis.jpeg" alt="Descripción de la imagen" width="400" height="500"></center>
         
             
 </div>
@@ -56,6 +61,15 @@
 
 <div class="transparente">
         <h1>Clase principal <code>IniciarJuego</code></h1>
+
+
+        <h2>Métodos:</h2>
+
+        <h3><code>__init__(self, root)</code>:</h3>
+        <ul>
+            <li>Es el método constructor de la clase que inicializa los atributos y configura el tablero.</li>
+            <li>Llama al método <code>iniciar_juego()</code> para crear el tablero y los botones.</li>
+        </ul>
 
         <h2>Atributos:</h2>
         <ul>
@@ -67,82 +81,11 @@
             <li><strong><code>self.mensaje</code></strong>: Una variable de tipo <code>StringVar</code> que almacena los mensajes que se mostrarán en la interfaz (por ejemplo, para indicar quién ha ganado o si hay un empate).</li>
             <li><strong><code>self.botones</code></strong>: Es una lista que almacena los botones que representan cada una de las casillas del tablero.</li>
         </ul>
-        
-        <h2>Métodos:</h2>
-
-        <h3><code>__init__(self, root)</code>:</h3>
-        <ul>
-            <li>Es el método constructor de la clase que inicializa los atributos y configura el tablero.</li>
-            <li>Llama al método <code>iniciar_juego()</code> para crear el tablero y los botones.</li>
-        </ul>
-            
-            <h2>Clase <code>IniciarJuego</code></h2>
-
-<h3>Atributos:</h3>
-<ul>
-    <li><strong><code>self.J1</code></strong>: Representa el símbolo del Jugador 1. En este caso, es "O".</li>
-    <li><strong><code>self.J2</code></strong>: Representa el símbolo del Jugador 2. Es "X".</li>
-    <li><strong><code>self.tablero</code></strong>: Es una lista de 9 elementos, inicializada vacía (<code>[""] * 9</code>), que representa las casillas del tablero de juego.</li>
-    <li><strong><code>self.turno_actual</code></strong>: Almacena qué jugador tiene el turno en ese momento. Inicialmente es <code>self.J1</code>, es decir, el jugador 1.</li>
-    <li><strong><code>self.root</code></strong>: Referencia a la ventana principal de la aplicación <code>Tkinter</code>.</li>
-    <li><strong><code>self.mensaje</code></strong>: Una variable de tipo <code>StringVar</code> que almacena los mensajes que se mostrarán en la interfaz (por ejemplo, para indicar quién ha ganado o si hay un empate).</li>
-    <li><strong><code>self.botones</code></strong>: Es una lista que almacena los botones que representan cada una de las casillas del tablero.</li>
-</ul>
 
 </div>
+<br><br><br><br><br>
 
 
-
-<div class="transparente">
-<h2>Desglose del método <code>iniciar_juego()</code>:</h2>
-
-<ul>
-    <li><strong><code>self.J1 = "O"</code></strong>
-        <ul>
-            <li><strong>Descripción</strong>: Establece el símbolo del Jugador 1 como "O".</li>
-            <li><strong>Objetivo</strong>: Definir qué símbolo utilizará el primer jugador en el juego. Este símbolo se mostrará en el tablero cuando el jugador 1 haga un movimiento.</li>
-        </ul>
-    </li>
-    <li><strong><code>self.J2 = "X"</code></strong>
-        <ul>
-            <li><strong>Descripción</strong>: Establece el símbolo del Jugador 2 como "X".</li>
-            <li><strong>Objetivo</strong>: Definir qué símbolo utilizará el segundo jugador en el juego. Este símbolo se mostrará en el tablero cuando el jugador 2 haga un movimiento.</li>
-        </ul>
-    </li>
-    <li><strong><code>self.tablero = [""] * 9</code></strong>
-        <ul>
-            <li><strong>Descripción</strong>: Inicializa la lista <code>self.tablero</code> con 9 posiciones vacías, representadas por cadenas vacías (<code>""</code>).</li>
-            <li><strong>Objetivo</strong>: Crear una estructura de datos que representa el estado actual del tablero, con cada posición inicialmente vacía. Los índices de esta lista corresponden a las posiciones en el tablero de 3x3.</li>
-        </ul>
-    </li>
-    <li><strong><code>self.turno_actual = self.J1</code></strong>
-        <ul>
-            <li><strong>Descripción</strong>: Establece que el jugador 1 (con el símbolo "O") es el que comienza el juego.</li>
-            <li><strong>Objetivo</strong>: Determinar cuál jugador tiene el turno para hacer un movimiento. Inicialmente, el juego comienza con el Jugador 1.</li>
-        </ul>
-    </li>
-    <li><strong><code>self.root = root</code></strong>
-        <ul>
-            <li><strong>Descripción</strong>: Asigna la ventana principal de la aplicación Tkinter a <code>self.root</code>.</li>
-            <li><strong>Objetivo</strong>: Permitir que los widgets (como botones y etiquetas) se agreguen a esta ventana principal. Esta referencia es necesaria para manipular la interfaz gráfica del juego.</li>
-        </ul>
-    </li>
-    <li><strong><code>self.mensaje = StringVar()</code></strong>
-        <ul>
-            <li><strong>Descripción</strong>: Crea una variable de tipo <code>StringVar</code> que se utilizará para mostrar mensajes en la interfaz gráfica.</li>
-            <li><strong>Objetivo</strong>: Mantener un enlace dinámico entre el mensaje que se desea mostrar (como el resultado del juego) y la etiqueta en la interfaz gráfica. <code>StringVar</code> se actualiza automáticamente en la interfaz gráfica cuando su valor cambia.</li>
-        </ul>
-    </li>
-    <li><strong><code>self.iniciar_juego()</code></strong>
-        <ul>
-            <li><strong>Descripción</strong>: Llama al método <code>iniciar_juego()</code> para configurar el tablero y los botones del juego.</li>
-            <li><strong>Objetivo</strong>: Inicializar la interfaz gráfica del juego, creando los botones que representan las casillas del tablero y configurando el entorno del juego para que esté listo para que los jugadores comiencen a hacer movimientos.</li>
-        </ul>
-    </li>
-</ul>
-
-</div>
-<br><br>
 
 
 
@@ -192,7 +135,7 @@
     </li>
 </ol>
 </div>
-<br><br><br><br>
+<br><br><br><br><br><br><br><br>
 
 
 
@@ -267,7 +210,7 @@
 <br><br><br><br>
 
 
-
+<br><br>
 
 
 <div class="transparente">
@@ -310,6 +253,7 @@
 
 
 
+
 <h2>Desglose del método <strong>reiniciar_juego(self)</strong>:</h2>
 
 <ol>
@@ -347,6 +291,11 @@
 
             
     
+</div>
+<br><br><br><br><br><br>
 
+
+
+</body>
 </body>
 </html>
