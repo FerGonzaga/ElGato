@@ -1,0 +1,352 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>OOP</title>
+    <style>
+        body {
+            background-color: #3498db; /* Color sólido de fondo para el body */
+            margin: 0;
+            padding: 0;
+            height: 100vh;
+            overflow: hidden;
+        }
+
+        .transparente {
+            background-color: rgba(255, 255, 255, 0.5); /* Fondo blanco con 50% de transparencia */
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Sombra para mayor enfoque */
+            max-width: 90%; /* Asegura que el div no exceda el ancho de la ventana */
+            margin: auto; /* Centra el div horizontalmente */
+            position: relative; /* Permite posicionar el div de manera más flexible */
+            top: 50%; /* Ajusta la posición vertical */
+            transform: translateY(-50%); /* Centra el div verticalmente */
+        }
+
+        .ans {
+            font-family: 'Comic Sans MS', cursive, sans-serif;
+        }
+        .code {
+            background-color: #f4f4f4;
+            border-left: 4px solid #4CAF50;
+            padding: 10px;
+            font-family: 'Courier New', Courier, monospace;
+            overflow-x: auto;
+        }
+    </style>
+    
+</head>
+<body>
+    
+    
+    <div class="transparente">
+        <h1> GATOGAME </h1>
+        
+
+        <h2>DISEÑO DEL JUEGO</h2>
+
+<center><img src="dis.png" alt="Descripción de la imagen" width="400" height="500"></center>
+        
+            
+</div>
+<br><br>
+
+
+<div class="transparente">
+        <h1>Clase principal <code>IniciarJuego</code></h1>
+
+        <h2>Atributos:</h2>
+        <ul>
+            <li><strong><code>self.J1</code></strong>: Representa el símbolo del Jugador 1. En este caso, es "O".</li>
+            <li><strong><code>self.J2</code></strong>: Representa el símbolo del Jugador 2. Es "X".</li>
+            <li><strong><code>self.tablero</code></strong>: Es una lista de 9 elementos, inicializada vacía (<code>[""] * 9</code>), que representa las casillas del tablero de juego.</li>
+            <li><strong><code>self.turno_actual</code></strong>: Almacena qué jugador tiene el turno en ese momento. Inicialmente es <code>self.J1</code>, es decir, el jugador 1.</li>
+            <li><strong><code>self.root</code></strong>: Referencia a la ventana principal de la aplicación <code>Tkinter</code>.</li>
+            <li><strong><code>self.mensaje</code></strong>: Una variable de tipo <code>StringVar</code> que almacena los mensajes que se mostrarán en la interfaz (por ejemplo, para indicar quién ha ganado o si hay un empate).</li>
+            <li><strong><code>self.botones</code></strong>: Es una lista que almacena los botones que representan cada una de las casillas del tablero.</li>
+        </ul>
+        
+        <h2>Métodos:</h2>
+
+        <h3><code>__init__(self, root)</code>:</h3>
+        <ul>
+            <li>Es el método constructor de la clase que inicializa los atributos y configura el tablero.</li>
+            <li>Llama al método <code>iniciar_juego()</code> para crear el tablero y los botones.</li>
+        </ul>
+            
+            <h2>Clase <code>IniciarJuego</code></h2>
+
+<h3>Atributos:</h3>
+<ul>
+    <li><strong><code>self.J1</code></strong>: Representa el símbolo del Jugador 1. En este caso, es "O".</li>
+    <li><strong><code>self.J2</code></strong>: Representa el símbolo del Jugador 2. Es "X".</li>
+    <li><strong><code>self.tablero</code></strong>: Es una lista de 9 elementos, inicializada vacía (<code>[""] * 9</code>), que representa las casillas del tablero de juego.</li>
+    <li><strong><code>self.turno_actual</code></strong>: Almacena qué jugador tiene el turno en ese momento. Inicialmente es <code>self.J1</code>, es decir, el jugador 1.</li>
+    <li><strong><code>self.root</code></strong>: Referencia a la ventana principal de la aplicación <code>Tkinter</code>.</li>
+    <li><strong><code>self.mensaje</code></strong>: Una variable de tipo <code>StringVar</code> que almacena los mensajes que se mostrarán en la interfaz (por ejemplo, para indicar quién ha ganado o si hay un empate).</li>
+    <li><strong><code>self.botones</code></strong>: Es una lista que almacena los botones que representan cada una de las casillas del tablero.</li>
+</ul>
+
+</div>
+
+
+
+<div class="transparente">
+<h2>Desglose del método <code>iniciar_juego()</code>:</h2>
+
+<ul>
+    <li><strong><code>self.J1 = "O"</code></strong>
+        <ul>
+            <li><strong>Descripción</strong>: Establece el símbolo del Jugador 1 como "O".</li>
+            <li><strong>Objetivo</strong>: Definir qué símbolo utilizará el primer jugador en el juego. Este símbolo se mostrará en el tablero cuando el jugador 1 haga un movimiento.</li>
+        </ul>
+    </li>
+    <li><strong><code>self.J2 = "X"</code></strong>
+        <ul>
+            <li><strong>Descripción</strong>: Establece el símbolo del Jugador 2 como "X".</li>
+            <li><strong>Objetivo</strong>: Definir qué símbolo utilizará el segundo jugador en el juego. Este símbolo se mostrará en el tablero cuando el jugador 2 haga un movimiento.</li>
+        </ul>
+    </li>
+    <li><strong><code>self.tablero = [""] * 9</code></strong>
+        <ul>
+            <li><strong>Descripción</strong>: Inicializa la lista <code>self.tablero</code> con 9 posiciones vacías, representadas por cadenas vacías (<code>""</code>).</li>
+            <li><strong>Objetivo</strong>: Crear una estructura de datos que representa el estado actual del tablero, con cada posición inicialmente vacía. Los índices de esta lista corresponden a las posiciones en el tablero de 3x3.</li>
+        </ul>
+    </li>
+    <li><strong><code>self.turno_actual = self.J1</code></strong>
+        <ul>
+            <li><strong>Descripción</strong>: Establece que el jugador 1 (con el símbolo "O") es el que comienza el juego.</li>
+            <li><strong>Objetivo</strong>: Determinar cuál jugador tiene el turno para hacer un movimiento. Inicialmente, el juego comienza con el Jugador 1.</li>
+        </ul>
+    </li>
+    <li><strong><code>self.root = root</code></strong>
+        <ul>
+            <li><strong>Descripción</strong>: Asigna la ventana principal de la aplicación Tkinter a <code>self.root</code>.</li>
+            <li><strong>Objetivo</strong>: Permitir que los widgets (como botones y etiquetas) se agreguen a esta ventana principal. Esta referencia es necesaria para manipular la interfaz gráfica del juego.</li>
+        </ul>
+    </li>
+    <li><strong><code>self.mensaje = StringVar()</code></strong>
+        <ul>
+            <li><strong>Descripción</strong>: Crea una variable de tipo <code>StringVar</code> que se utilizará para mostrar mensajes en la interfaz gráfica.</li>
+            <li><strong>Objetivo</strong>: Mantener un enlace dinámico entre el mensaje que se desea mostrar (como el resultado del juego) y la etiqueta en la interfaz gráfica. <code>StringVar</code> se actualiza automáticamente en la interfaz gráfica cuando su valor cambia.</li>
+        </ul>
+    </li>
+    <li><strong><code>self.iniciar_juego()</code></strong>
+        <ul>
+            <li><strong>Descripción</strong>: Llama al método <code>iniciar_juego()</code> para configurar el tablero y los botones del juego.</li>
+            <li><strong>Objetivo</strong>: Inicializar la interfaz gráfica del juego, creando los botones que representan las casillas del tablero y configurando el entorno del juego para que esté listo para que los jugadores comiencen a hacer movimientos.</li>
+        </ul>
+    </li>
+</ul>
+
+</div>
+<br><br>
+
+
+
+
+<div class="transparente">
+<h2>Desglose del método <strong>iniciar_juego(self)</strong>:</h2>
+
+<ol>
+    <li><strong>self.botones = []</strong>
+        <ul>
+            <li>Se inicializa una lista vacía llamada <code>self.botones</code> para almacenar los botones correspondientes a las casillas del tablero.</li>
+            <li>Esta lista se utilizará más tarde para hacer referencia a cada botón, lo que permitirá actualizar su texto y estado.</li>
+        </ul>
+    </li>
+    <li><strong><code>for i in range(9):</code></strong>
+        <ul>
+            <li>Este bucle <code>for</code> itera 9 veces (del 0 al 8), ya que el tablero tiene 9 casillas en total (3 filas por 3 columnas).</li>
+            <li>La variable <code>i</code> representa el índice de cada casilla/botón del tablero.</li>
+        </ul>
+    </li>
+    <li><strong><code>boton = Button(self.root, text="", width=10, height=3, command=lambda i=i: self.ciclo(i))</code></strong>
+        <ul>
+            <li>Se crea un botón usando el widget <code>Button</code> de <code>tkinter</code>, que pertenece a la ventana principal (<code>self.root</code>).</li>
+            <li><strong><code>text=""</code></strong>: El texto del botón se inicializa vacío (ya que la casilla empieza vacía).</li>
+            <li><strong><code>width=10, height=3</code></strong>: Define el tamaño del botón (ancho y alto en términos de texto).</li>
+            <li><strong><code>command=lambda i=i: self.ciclo(i)</code></strong>: Define qué sucede cuando se hace clic en el botón. En este caso, se utiliza una función <code>lambda</code> que llama al método <code>self.ciclo(i)</code> pasando la posición actual <code>i</code> como argumento. Esto permite que el botón reaccione al clic y ejecute la lógica del turno del juego.</li>
+        </ul>
+    </li>
+    <li><strong><code>boton.grid(row=i // 3, column=i % 3)</code></strong>
+        <ul>
+            <li>Se utiliza el método <code>grid()</code> para colocar el botón en la ventana principal dentro de una cuadrícula de 3x3.</li>
+            <li><strong><code>row=i // 3</code></strong>: Calcula en qué fila debe estar el botón. La división entera (<code>//</code>) asegura que los primeros tres botones (índices 0, 1, 2) estén en la fila 0, los siguientes tres (índices 3, 4, 5) en la fila 1, y así sucesivamente.</li>
+            <li><strong><code>column=i % 3</code></strong>: Calcula en qué columna debe ir el botón. El operador módulo (<code>%</code>) asegura que los botones se coloquen en las columnas correctas, es decir, la primera columna (0), la segunda (1) y la tercera (2).</li>
+        </ul>
+    </li>
+    <li><strong><code>self.botones.append(boton)</code></strong>
+        <ul>
+            <li>Agrega cada botón creado a la lista <code>self.botones</code>. Esto permite que más tarde se pueda acceder a cada botón individualmente para cambiar su texto, deshabilitarlo, o hacer otras modificaciones.</li>
+        </ul>
+    </li>
+    <li><strong><code>Label(self.root, textvariable=self.mensaje).grid(row=3, column=1)</code></strong>
+        <ul>
+            <li>Crea una etiqueta (<code>Label</code>) que mostrará los mensajes durante el juego (por ejemplo, quién ha ganado o si hay empate).</li>
+            <li><strong><code>textvariable=self.mensaje</code></strong>: Se vincula la variable <code>self.mensaje</code> a la etiqueta, de modo que cualquier cambio en <code>self.mensaje</code> automáticamente actualice el texto que se muestra en la interfaz.</li>
+            <li><strong><code>grid(row=3, column=1)</code></strong>: Coloca la etiqueta en la fila 3, columna 1, justo debajo del tablero de botones, ya que el tablero utiliza las filas 0 a 2.</li>
+        </ul>
+    </li>
+</ol>
+</div>
+<br><br><br><br>
+
+
+
+
+
+<div class="transparente">
+<h2>Desglose del método <strong>ciclo(self, posicion)</strong>:</h2>
+
+<ol>
+    <li><strong><code>if self.tablero[posicion] == "":</code></strong>
+        <ul>
+            <li>Este <code>if</code> comprueba si la casilla seleccionada está vacía (es decir, no tiene ya un símbolo de jugador).</li>
+            <li><strong>Objetivo:</strong> Asegurarse de que el jugador no pueda colocar su símbolo en una casilla que ya ha sido ocupada.</li>
+        </ul>
+    </li>
+    <li><strong><code>self.tablero[posicion] = self.turno_actual</code></strong>
+        <ul>
+            <li>Se actualiza la lista <code>self.tablero</code> en la posición seleccionada con el símbolo del jugador actual (ya sea "O" o "X").</li>
+            <li><strong>Objetivo:</strong> Registrar en la estructura lógica del tablero que el jugador ha ocupado esta casilla.</li>
+        </ul>
+    </li>
+    <li><strong><code>self.botones[posicion].config(text=self.turno_actual)</code></strong>
+        <ul>
+            <li>Se actualiza el texto del botón en la interfaz gráfica, colocando el símbolo del jugador actual en la casilla correspondiente.</li>
+            <li><strong>Objetivo:</strong> Mostrar visualmente el movimiento en el tablero.</li>
+        </ul>
+    </li>
+    <li><strong><code>if self.quien_gana():</code></strong>
+        <ul>
+            <li>Llama al método <code>quien_gana()</code> para verificar si, después de este movimiento, el jugador actual ha ganado el juego.</li>
+            <li><strong>Objetivo:</strong> Comprobar si el jugador ha completado una combinación ganadora.</li>
+        </ul>
+    </li>
+    <li><strong><code>self.mensaje.set(f"¡{self.turno_actual} ha ganado!")</code></strong>
+        <ul>
+            <li>Si hay un ganador, se actualiza el mensaje en la interfaz gráfica para indicar que el jugador actual ha ganado.</li>
+            <li><strong>Objetivo:</strong> Informar al usuario sobre el ganador.</li>
+        </ul>
+    </li>
+    <li><strong><code>self.root.after(2000, self.reiniciar_juego)</code></strong>
+        <ul>
+            <li>Después de 2 segundos (2000 milisegundos), se llama al método <code>reiniciar_juego()</code> para reiniciar la partida.</li>
+            <li><strong>Objetivo:</strong> Permitir que el jugador vea el resultado antes de que el tablero se reinicie.</li>
+        </ul>
+    </li>
+    <li><strong><code>elif all(self.tablero):</code></strong>
+        <ul>
+            <li>Verifica si todas las casillas del tablero están llenas, lo que significaría un empate si no se ha declarado un ganador.</li>
+            <li><strong>Objetivo:</strong> Detectar si el tablero está completo y no hay más movimientos posibles.</li>
+        </ul>
+    </li>
+    <li><strong><code>self.mensaje.set("¡Empate!")</code></strong>
+        <ul>
+            <li>Si todas las casillas están llenas y no hay ganador, se actualiza el mensaje para indicar que el juego ha terminado en empate.</li>
+            <li><strong>Objetivo:</strong> Notificar a los jugadores del empate.</li>
+        </ul>
+    </li>
+    <li><strong><code>self.root.after(2000, self.reiniciar_juego)</code></strong>
+        <ul>
+            <li>Al igual que en el caso de un ganador, el juego se reinicia después de 2 segundos si ha habido un empate.</li>
+            <li><strong>Objetivo:</strong> Permitir que el jugador vea el resultado antes de que el tablero se reinicie.</li>
+        </ul>
+    </li>
+    <li><strong><code>else: self.turno_actual = self.J2 if self.turno_actual == self.J1 else self.J1</code></strong>
+        <ul>
+            <li>Si no hay ganador y no hay empate, se cambia el turno al siguiente jugador.</li>
+            <li><strong>Objetivo:</strong> Alternar el turno entre los jugadores 1 y 2, asegurando que el juego continúe hasta que haya un ganador o un empate.</li>
+        </ul>
+    </li>
+</ol>
+</div>
+<br><br><br><br>
+
+
+
+
+
+<div class="transparente">
+<h2>Desglose del método <strong>quien_gana(self)</strong>:</h2>
+
+<ol>
+    <li><strong><code>combinaciones = [[0, 1, 2], [3, 4, 5], [6, 7, 8], [0, 3, 6], [1, 4, 7], [2, 5, 8], [0, 4, 8], [2, 4, 6]]</code></strong>
+        <ul>
+            <li>Se define una lista de listas, donde cada lista interna contiene una combinación de índices que representan una fila, columna o diagonal ganadora en el tablero.</li>
+            <li><strong>Objetivo:</strong> Definir todas las combinaciones posibles que darían lugar a una victoria en el juego (filas, columnas y diagonales).</li>
+        </ul>
+    </li>
+    <li><strong><code>for combinacion in combinaciones:</code></strong>
+        <ul>
+            <li>Itera sobre cada una de las combinaciones ganadoras posibles.</li>
+            <li><strong>Objetivo:</strong> Verificar si alguna de estas combinaciones ha sido completada por un jugador.</li>
+        </ul>
+    </li>
+    <li><strong><code>if self.tablero[combinacion[0]] == self.tablero[combinacion[1]] == self.tablero[combinacion[2]] != "":</code></strong>
+        <ul>
+            <li>Este <code>if</code> verifica si los tres elementos en la combinación actual del tablero son iguales y no están vacíos.</li>
+            <li><strong>Objetivo:</strong> Determinar si los tres botones que forman una fila, columna o diagonal tienen el mismo símbolo (es decir, el jugador ha ganado).</li>
+        </ul>
+    </li>
+    <li><strong><code>return True</code></strong>
+        <ul>
+            <li>Si se cumple la condición anterior, el método devuelve <code>True</code>, lo que indica que hay un ganador.</li>
+            <li><strong>Objetivo:</strong> Señalar que alguien ha ganado y el juego debe terminar.</li>
+        </ul>
+    </li>
+    <li><strong><code>return False</code></strong>
+        <ul>
+            <li>Si ninguna combinación ganadora se ha cumplido, el método retorna <code>False</code>.</li>
+            <li><strong>Objetivo:</strong> Indicar que no hay ganador en el estado actual del tablero.</li>
+        </ul>
+    </li>
+</ol>
+
+
+
+
+
+<h2>Desglose del método <strong>reiniciar_juego(self)</strong>:</h2>
+
+<ol>
+    <li><strong><code>self.tablero = [""] * 9</code></strong>
+        <ul>
+            <li>Se reinicia la lista <code>self.tablero</code>, volviendo a tener 9 posiciones vacías.</li>
+            <li><strong>Objetivo:</strong> Limpiar el tablero lógico para comenzar una nueva partida.</li>
+        </ul>
+    </li>
+    <li><strong><code>self.turno_actual = self.J1</code></strong>
+        <ul>
+            <li>El turno se reinicia para que el jugador 1 ("O") comience nuevamente.</li>
+            <li><strong>Objetivo:</strong> Asegurar que siempre el jugador 1 empiece cuando el juego se reinicie.</li>
+        </ul>
+    </li>
+    <li><strong><code>self.mensaje.set("")</code></strong>
+        <ul>
+            <li>Se limpia cualquier mensaje previo (de victoria o empate) que aparezca en la interfaz gráfica.</li>
+            <li><strong>Objetivo:</strong> Restablecer la interfaz para que no muestre mensajes anteriores.</li>
+        </ul>
+    </li>
+    <li><strong><code>for boton in self.botones:</code></strong>
+        <ul>
+            <li>Itera sobre todos los botones del tablero.</li>
+            <li><strong>Objetivo:</strong> Preparar los botones para la nueva partida.</li>
+        </ul>
+    </li>
+    <li><strong><code>boton.config(text="", state=NORMAL)</code></strong>
+        <ul>
+            <li>Se configura cada botón para que su texto esté vacío y su estado sea <code>NORMAL</code>, lo que permite que los jugadores hagan clic en ellos nuevamente.</li>
+            <li><strong>Objetivo:</strong> Restablecer el estado visual y funcional de cada botón, permitiendo que los jugadores interactúen con ellos en la nueva partida.</li>
+        </ul>
+    </li>
+</ol>
+
+            
+    
+
+</body>
+</html>
