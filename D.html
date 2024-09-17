@@ -79,7 +79,6 @@
             <li><strong><code>self.turno_actual</code></strong>: Almacena qué jugador tiene el turno en ese momento. Inicialmente es <code>self.J1</code>, es decir, el jugador 1.</li>
             <li><strong><code>self.root</code></strong>: Referencia a la ventana principal de la aplicación <code>Tkinter</code>.</li>
             <li><strong><code>self.mensaje</code></strong>: Una variable de tipo <code>StringVar</code> que almacena los mensajes que se mostrarán en la interfaz (por ejemplo, para indicar quién ha ganado o si hay un empate).</li>
-            <li><strong><code>self.botones</code></strong>: Es una lista que almacena los botones que representan cada una de las casillas del tablero.</li>
         </ul>
 
 </div>
@@ -210,84 +209,108 @@
 <br><br><br><br>
 
 
-<br><br>
+<br><br><br><br><br><br><br><br><br><br><br>
 
 
 <div class="transparente">
-<h2>Desglose del método <strong>quien_gana(self)</strong>:</h2>
+    <h2>Desglose del método <strong>quien_gana(self)</strong>:</h2>
 
-<ol>
-    <li><strong><code>combinaciones = [[0, 1, 2], [3, 4, 5], [6, 7, 8], [0, 3, 6], [1, 4, 7], [2, 5, 8], [0, 4, 8], [2, 4, 6]]</code></strong>
-        <ul>
-            <li>Se define una lista de listas, donde cada lista interna contiene una combinación de índices que representan una fila, columna o diagonal ganadora en el tablero.</li>
-            <li><strong>Objetivo:</strong> Definir todas las combinaciones posibles que darían lugar a una victoria en el juego (filas, columnas y diagonales).</li>
-        </ul>
-    </li>
-    <li><strong><code>for combinacion in combinaciones:</code></strong>
-        <ul>
-            <li>Itera sobre cada una de las combinaciones ganadoras posibles.</li>
-            <li><strong>Objetivo:</strong> Verificar si alguna de estas combinaciones ha sido completada por un jugador.</li>
-        </ul>
-    </li>
-    <li><strong><code>if self.tablero[combinacion[0]] == self.tablero[combinacion[1]] == self.tablero[combinacion[2]] != "":</code></strong>
-        <ul>
-            <li>Este <code>if</code> verifica si los tres elementos en la combinación actual del tablero son iguales y no están vacíos.</li>
-            <li><strong>Objetivo:</strong> Determinar si los tres botones que forman una fila, columna o diagonal tienen el mismo símbolo (es decir, el jugador ha ganado).</li>
-        </ul>
-    </li>
-    <li><strong><code>return True</code></strong>
-        <ul>
-            <li>Si se cumple la condición anterior, el método devuelve <code>True</code>, lo que indica que hay un ganador.</li>
-            <li><strong>Objetivo:</strong> Señalar que alguien ha ganado y el juego debe terminar.</li>
-        </ul>
-    </li>
-    <li><strong><code>return False</code></strong>
-        <ul>
-            <li>Si ninguna combinación ganadora se ha cumplido, el método retorna <code>False</code>.</li>
-            <li><strong>Objetivo:</strong> Indicar que no hay ganador en el estado actual del tablero.</li>
-        </ul>
-    </li>
-</ol>
+    <ol>
+        <li><strong><code>combinaciones = [[0, 1, 2], [3, 4, 5], [6, 7, 8], [0, 3, 6], [1, 4, 7], [2, 5, 8], [0, 4, 8], [2, 4, 6]]</code></strong>
+            <ul>
+                <li>Se define una lista de listas, donde cada lista interna contiene una combinación de índices que representan una fila, columna o diagonal ganadora en el tablero.</li>
+                <li><strong>Objetivo:</strong> Definir todas las combinaciones posibles que darían lugar a una victoria en el juego (filas, columnas y diagonales).</li>
+            </ul>
+        </li>
+        <li><strong><code>for combinacion in combinaciones:</code></strong>
+            <ul>
+                <li><strong>Descripción General:</strong> Este bucle recorre cada una de las combinaciones de índices definidas en la lista <code>combinaciones</code>.</li>
+                <li><strong>Desglose Detallado:</strong>
+                    <ul>
+                        <li><strong><code>combinacion</code></strong>: Es una variable que representa cada lista individual dentro de la lista <code>combinaciones</code>. Cada lista de <code>combinaciones</code> contiene tres índices que corresponden a una fila, columna o diagonal en el tablero.</li>
+                        <li><strong>Iteración:</strong> En cada iteración del bucle, la variable <code>combinacion</code> toma el valor de una de las listas internas. Por ejemplo, en la primera iteración, <code>combinacion</code> será <code>[0, 1, 2]</code>, en la segunda iteración será <code>[3, 4, 5]</code>, y así sucesivamente.</li>
+                        <li><strong>Objetivo:</strong> Evaluar si la combinación actual de índices representa una línea ganadora en el tablero.</li>
+                    </ul>
+                </li>
+            </ul>
+        </li>
+        <li><strong><code>if self.tablero[combinacion[0]] == self.tablero[combinacion[1]] == self.tablero[combinacion[2]] != "":</code></strong>
+            <ul>
+                <li><strong>Descripción General:</strong> Esta línea verifica si los tres elementos del tablero que corresponden a una combinación específica son iguales y no están vacíos.</li>
+                <li><strong>Desglose Detallado:</strong>
+                    <ul>
+                        <li><strong><code>self.tablero[combinacion[0]]</code></strong>: Accede al valor en la posición del tablero especificada por el primer índice de la combinación actual.</li>
+                        <li><strong><code>self.tablero[combinacion[1]]</code></strong>: Accede al valor en la posición del tablero especificada por el segundo índice de la combinación actual.</li>
+                        <li><strong><code>self.tablero[combinacion[2]]</code></strong>: Accede al valor en la posición del tablero especificada por el tercer índice de la combinación actual.</li>
+                        <li><strong>Comparaciones:</strong>
+                            <ul>
+                                <li><strong><code>self.tablero[combinacion[0]] == self.tablero[combinacion[1]]</code></strong>: Compara el valor en la primera posición de la combinación con el valor en la segunda posición. Esta comparación verifica si ambos valores son iguales.</li>
+                                <li><strong><code>self.tablero[combinacion[1]] == self.tablero[combinacion[2]]</code></strong>: Compara el valor en la segunda posición de la combinación con el valor en la tercera posición. Esta comparación verifica si ambos valores son iguales.</li>
+                                <li><strong><code>self.tablero[combinacion[2]] != ""</code></strong>: Verifica que el valor en la tercera posición no esté vacío (o sea, no sea una cadena vacía). Esto asegura que la combinación está completa con un símbolo y no está vacía.</li>
+                            </ul>
+                        </li>
+                        <li><strong>Objetivo:</strong> Asegurarse de que todos los tres valores en la combinación actual sean iguales y que no estén vacíos, lo que indica que un jugador ha logrado una línea completa con el mismo símbolo.</li>
+                    </ul>
+                </li>
+            </ul>
+        </li>
+        <li><strong><code>return True</code></strong>
+            <ul>
+                <li>Si se cumple la condición anterior, el método devuelve <code>True</code>, lo que indica que hay un ganador.</li>
+                <li><strong>Objetivo:</strong> Señalar que alguien ha ganado y el juego debe terminar.</li>
+            </ul>
+        </li>
+        <li><strong><code>return False</code></strong>
+            <ul>
+                <li>Si ninguna combinación ganadora se ha cumplido, el método retorna <code>False</code>.</li>
+                <li><strong>Objetivo:</strong> Indicar que no hay ganador en el estado actual del tablero.</li>
+            </ul>
+        </li>
+    </ol>
+    
+    
 
 
 
 
 
 
-<h2>Desglose del método <strong>reiniciar_juego(self)</strong>:</h2>
+    <h2>Desglose del método <strong>reiniciar_juego(self)</strong>:</h2>
 
-<ol>
-    <li><strong><code>self.tablero = [""] * 9</code></strong>
-        <ul>
-            <li>Se reinicia la lista <code>self.tablero</code>, volviendo a tener 9 posiciones vacías.</li>
-            <li><strong>Objetivo:</strong> Limpiar el tablero lógico para comenzar una nueva partida.</li>
-        </ul>
-    </li>
-    <li><strong><code>self.turno_actual = self.J1</code></strong>
-        <ul>
-            <li>El turno se reinicia para que el jugador 1 ("O") comience nuevamente.</li>
-            <li><strong>Objetivo:</strong> Asegurar que siempre el jugador 1 empiece cuando el juego se reinicie.</li>
-        </ul>
-    </li>
-    <li><strong><code>self.mensaje.set("")</code></strong>
-        <ul>
-            <li>Se limpia cualquier mensaje previo (de victoria o empate) que aparezca en la interfaz gráfica.</li>
-            <li><strong>Objetivo:</strong> Restablecer la interfaz para que no muestre mensajes anteriores.</li>
-        </ul>
-    </li>
-    <li><strong><code>for boton in self.botones:</code></strong>
-        <ul>
-            <li>Itera sobre todos los botones del tablero.</li>
-            <li><strong>Objetivo:</strong> Preparar los botones para la nueva partida.</li>
-        </ul>
-    </li>
-    <li><strong><code>boton.config(text="", state=NORMAL)</code></strong>
-        <ul>
-            <li>Se configura cada botón para que su texto esté vacío y su estado sea <code>NORMAL</code>, lo que permite que los jugadores hagan clic en ellos nuevamente.</li>
-            <li><strong>Objetivo:</strong> Restablecer el estado visual y funcional de cada botón, permitiendo que los jugadores interactúen con ellos en la nueva partida.</li>
-        </ul>
-    </li>
-</ol>
+    <ol>
+        <li><strong><code>self.tablero = [""] * 9</code></strong>
+            <ul>
+                <li>Se reinicia la lista <code>self.tablero</code>, estableciendo 9 posiciones vacías.</li>
+                <li><strong>Objetivo:</strong> Limpiar el tablero lógico para comenzar una nueva partida.</li>
+            </ul>
+        </li>
+        <li><strong><code>self.turno_actual = self.J1</code></strong>
+            <ul>
+                <li>Se reinicia el turno para que el jugador 1 (generalmente "X") comience nuevamente.</li>
+                <li><strong>Objetivo:</strong> Asegurar que el jugador 1 empiece siempre cuando el juego se reinicie.</li>
+            </ul>
+        </li>
+        <li><strong><code>self.mensaje.set("")</code></strong>
+            <ul>
+                <li>Se limpia cualquier mensaje previo (como mensajes de victoria o empate) que aparezca en la interfaz gráfica.</li>
+                <li><strong>Objetivo:</strong> Restablecer la interfaz para que no muestre mensajes de la partida anterior.</li>
+            </ul>
+        </li>
+        <li><strong><code>for boton in self.botones:</code></strong>
+            <ul>
+                <li>Se itera sobre cada botón en la lista <code>self.botones</code>.</li>
+                <li><strong>Descripción:</strong> Permite aplicar configuraciones a cada botón en la interfaz gráfica del usuario.</li>
+                <li><strong>Objetivo:</strong> Restablecer todos los botones en la interfaz de usuario a su estado inicial.</li>
+            </ul>
+        </li>
+        <li><strong><code>boton.config(text="", state=NORMAL)</code></strong>
+            <ul>
+                <li><strong>Descripción:</strong> Se configura cada botón para que su texto esté vacío y su estado sea <code>NORMAL</code>.</li>
+                <li><strong>Objetivo:</strong> Reiniciar el texto en los botones (es decir, borrar cualquier texto que represente los movimientos previos) y habilitar los botones para que puedan ser usados nuevamente.</li>
+            </ul>
+        </li>
+    </ol>
+    
 
             
     
